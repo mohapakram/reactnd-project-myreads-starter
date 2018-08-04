@@ -4,37 +4,22 @@ import Search from './mainComponents/Search';
 import BooksList from './mainComponents/BooksList';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Fuse from 'fuse.js';
 import './App.css'
 
 class BooksApp extends React.Component {
   state = {
     books:[],
-    query:'',
-    result:[]
+    query:''
   }
     
   componentDidMount() {
     BooksAPI.getAll().then(books => this.setState({ books }));
   }
 
-  search = (query) => {
-  let options = {
-    keys:[
-      "title",
-      "authors"
-    ]
-  }
-  let fuse = new Fuse(this.state.books , options)
 
-  this.setState({
-    result: fuse.search(query)
-  })
-  }
-    
  updateBook = (book, shelf) => {
-   this.setState( (state)=>({
-    books: state.books.map( (b)=>{
+      this.setState( (state)=>({
+       books: state.books.map( (b)=>{
        if(b.id === book.id){
           b.shelf = shelf;
        }  
@@ -42,7 +27,8 @@ class BooksApp extends React.Component {
      } )
      
    }))
-   BooksAPI.update(book,shelf);
+  
+   BooksAPI.update(book , shelf);
  }
 
   render() {
@@ -57,7 +43,7 @@ class BooksApp extends React.Component {
                 </div>
            </div>  
        )}/>
-       <Route path="/search" render={ ()=> <Search search={this.search} updateBook={this.updateBook} result={this.state.result}/>}/>   
+       <Route path="/search" render={ ()=> <Search  updateBook={this.updateBook} books={this.state.books} result={this.state.books}/>}/>   
       </div>
     )
   }

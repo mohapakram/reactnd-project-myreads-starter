@@ -1,9 +1,8 @@
 import React , { Component } from 'react';
 import Abook from '../Abook';
 
-class Read extends Component {
-    render(){
-      const { books , updateBook } = this.props;
+const Read = (props)=>{
+      const { books , updateBook } = props;
         return(
             <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
@@ -23,6 +22,6 @@ class Read extends Component {
                 </div>
         )
     }
-}
+
 
 export default Read;

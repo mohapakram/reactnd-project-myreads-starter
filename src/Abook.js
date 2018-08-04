@@ -1,9 +1,7 @@
 import React , { Component } from 'react';
 
-class Abook extends Component {
-
-    render(){
-        const { book , updateBook } = this.props;
+const Abook = (props)=> {
+   const { book , updateBook } = props;
         return(
           <div className="book">
                           <div className="book-top">
@@ -11,7 +9,7 @@ class Abook extends Component {
                             <div className="book-shelf-changer">
                               <select value={book.shelf ? book.shelf : "none"} onChange={ (e)=> {
 
-                                updateBook( { id:book.id} , e.target.value)} 
+                                updateBook( book , e.target.value)} 
 
                               }>
                                 <option value="move" disabled>Move to...</option>
@@ -26,7 +24,8 @@ class Abook extends Component {
                           <div className="book-authors">{book.authors}</div>
                         </div>
         )
-    }
 }
+       
+
 
 export default Abook;
