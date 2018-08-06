@@ -6,7 +6,7 @@ This is a book lindding app made with react to share books.
 1. add them to your list .
 1. chosse between `read` , `currentlyReading` or `wantToRead` sections.
 
-#To get started developing right away:
+# To get started developing right away:
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
