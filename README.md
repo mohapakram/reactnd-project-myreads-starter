@@ -1,6 +1,6 @@
 # MyReads Project
 
-This is book lindding app.
+This is a book lindding app made with react to share books. 
 ### you can :
 1. Search for books.
 1. add them to your list .
