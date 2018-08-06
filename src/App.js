@@ -7,11 +7,13 @@ import { Link } from 'react-router-dom';
 import './App.css'
 
 class BooksApp extends React.Component {
-  state = {
-    books:[],
-    query:''
-  }
+    state = {
+      books:[],
+      query:''
+    }
+  
     
+
   componentDidMount() {
     BooksAPI.getAll().then(books => this.setState({ books }));
   }
@@ -28,7 +30,7 @@ class BooksApp extends React.Component {
      
    }))
   
-   BooksAPI.update(book , shelf);
+ BooksAPI.update(book , shelf).then( (res)=> console.log(res) );
  }
 
   render() {

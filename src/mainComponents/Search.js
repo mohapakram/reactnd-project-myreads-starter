@@ -4,24 +4,22 @@ import Abook from '../Abook'
 import * as BooksAPI from '../BooksAPI'
 
 class Search extends Component{
-    state={
-        books:[]
-    }
-
+    
    search = (query)=>{
           if(query.length){
-               BooksAPI.search(query).then((books)=>{
-                   this.setState({
-                       books
-                    })
-               })
-          }else{
-              this.setState({ books:[]})
+               BooksAPI.search(query).then((result)=>{
+                  this.props.map((homeBook)=>{
+                      result.map((resBook)=>{
+                      if(homeBook.id === resBook.id){
+                          homeBook.shelf = resBook.shelf;
+                      }
+                      });
+               });
           }
+               )}
    }
-
     render(){
-        const {  updateBook} = this.props;
+        const {  updateBook , books } = this.props;
         return(
              <div className="search-books">
                     <div className="search-books-bar">
@@ -35,7 +33,7 @@ class Search extends Component{
                     </div>
                     <div className="search-books-results">
                     <ol className="books-grid">
-                     { this.state.books.map( (book) =>
+                     { books.map( (book) =>
                          {
                              return(
                                  <li>
