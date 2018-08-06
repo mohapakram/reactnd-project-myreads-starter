@@ -4,18 +4,36 @@ import Abook from '../Abook'
 import * as BooksAPI from '../BooksAPI'
 
 class Search extends Component{
+    state = {
+        books:[],
+        query:"",
+        oldBooks: this.props.books
+    }
     
    search = (query)=>{
-          if(query.length){
+   if(!query){
+       this.setState({books:[]});
+   }
+    if(query.length){
+            this.setState({query:query.trim()});
+
                BooksAPI.search(query).then((result)=>{
-                  this.props.map((homeBook)=>{
-                      result.map((resBook)=>{
-                      if(homeBook.id === resBook.id){
-                          homeBook.shelf = resBook.shelf;
-                      }
-                      });
-               });
+                   
+                  result.map((n)=>{
+                    
+                    this.state.oldBooks.map((o)=>{
+                     
+                        n.shelf = o.shelf
+
+                    })
+                      
+                  })
+
+                  this.setState({
+                   books:result
+                  })
           }
+          
                )}
    }
     render(){
@@ -26,14 +44,14 @@ class Search extends Component{
                     <Link className="close-search" to="/">Close</Link>
                     <div className="search-books-input-wrapper">
                         <input type="text" placeholder="Search by title or author" onChange={(e)=>{
-                            this.search(e.target.value , this.props.books)
+                            this.search(e.target.value)
                         }}/>
 
                     </div>
                     </div>
                     <div className="search-books-results">
                     <ol className="books-grid">
-                     { books.map( (book) =>
+                     { this.state.books.map( (book) =>
                          {
                              return(
                                  <li>
