@@ -19,7 +19,10 @@ class Search extends Component{
 
                BooksAPI.search(query).then((result)=>{
                    
-                  result.map((n)=>{
+               if(result.error){
+                   this.setState({books:[]})
+               }else{
+                    result.map((n)=>{
                     
                     this.state.oldBooks.map((o)=>{
                      
@@ -32,6 +35,7 @@ class Search extends Component{
                   this.setState({
                    books:result
                   })
+               }
           }
           
                )}
